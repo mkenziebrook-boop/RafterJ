@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<title>Color Selections | Rafter J Construction</title>
+<meta name="description" content="Choose your roof, wall, trim, and soffit colors for your Rafter J Construction metal building and send your selections directly to us.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2216%22 fill=%22%237a2e1f%22/><text x=%2250%22 y=%2268%22 font-size=%2260%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Georgia,serif%22>J</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <div class="logo-badge" aria-hidden="true">
+      <span class="logo-badge__rafter">RAFTER</span>
+      <span class="logo-badge__j">J</span>
+      <span class="logo-badge__construction">CONSTRUCTION</span>
+    </div>
+    <div class="site-header__title">
+      <h1>Color Selection Sheet</h1>
+      <p>Pick your colors below, then send them straight to us.</p>
+    </div>
+    <a class="phone-pill" href="tel:13615763825">
+      <span class="phone-pill__icon" aria-hidden="true">&#9742;</span>
+      (361) 576-3825
+    </a>
+  </div>
+</header>
+
+<div class="progress-wrap" role="progressbar" aria-label="Form progress" aria-valuemin="1" aria-valuemax="7" id="progressWrap">
+  <div class="progress-bar"><div class="progress-bar__fill" id="progressFill"></div></div>
+  <p class="progress-label" id="progressLabel">Step 1 of 7: Your Information</p>
+</div>
+
+<main id="wizard" class="wizard"></main>
+
+<nav class="bottom-nav" id="bottomNav">
+  <button type="button" class="btn btn--ghost" id="backBtn">&larr; Back</button>
+  <button type="button" class="btn btn--primary" id="nextBtn">Next &rarr;</button>
+</nav>
+
+<footer class="site-footer">
+  <p>Rafter J Construction &middot; (361) 576-3825 &middot; Prefer to do this over the phone? Just give us a call &mdash; we're happy to help.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
