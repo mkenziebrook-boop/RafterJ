@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480">
+  <defs>
+    <path id="topArc" d="M 128.1 311.0 A 300 168 0 1 1 671.9 311.0" />
+    <path id="botArc" d="M 128.1 166.0 A 300 175 0 1 0 671.9 166.0" />
+    <style>
+      .word { font-family: 'Rye', serif; fill: #ffffff; }
+    </style>
+  </defs>
+
+  <ellipse cx="400" cy="240" rx="375" ry="220" fill="none" stroke="#ffffff" stroke-width="16"/>
+
+  <ellipse cx="400" cy="258" rx="150" ry="88" fill="none" stroke="#ffffff" stroke-width="7"/>
+
+  <text class="word" font-size="72" letter-spacing="6">
+    <textPath href="#topArc" startOffset="50%" text-anchor="middle">RAFTER</textPath>
+  </text>
+
+  <text class="word" font-size="46" letter-spacing="8">
+    <textPath href="#botArc" startOffset="50%" text-anchor="middle">CONSTRUCTION</textPath>
+  </text>
+
+  <!-- chevron roof accent above the J -->
+  <path d="M 345 200 L 400 155 L 455 200 L 455 226 L 400 182 L 345 226 Z" fill="#ffffff"/>
+
+  <text class="word" x="400" y="330" font-size="185" text-anchor="middle">J</text>
+</svg>

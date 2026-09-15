@@ -57,11 +57,13 @@ to call you instead — so nothing breaks if you forget this step.
   official *Mueller Panel Color Chart* (Signature 200 and Signature 300).
 - **What customers select**: edit the `COLOR_STEPS` list in `script.js`
   to add/remove/rename steps (currently Roof, Walls, Trim, Soffit).
-- **Logo**: the header currently shows a simple circular text badge built
-  in CSS (`.logo-badge` in `styles.css` / `index.html`) so the site works
-  without any image files. To use your real logo instead, drop an image
-  file (e.g. `logo.png`) into this folder and swap the `.logo-badge` div
-  in `index.html` for `<img src="logo.png" alt="Rafter J Construction">`.
+- **Logo**: `logo.svg` is a hand-recreated version of your oval "Rafter J
+  Construction" brand mark (built in code since the original logo file
+  couldn't be uploaded in this session). It's close, but not pixel-perfect.
+  To swap in your real logo file, drop it in this folder (e.g. `logo.png`)
+  and change the `src="logo.svg"` on the `<img class="logo-mark">` tag in
+  `index.html` to point to it. `.logo-mark` in `styles.css` controls its
+  display size.
 - **Brand colors**: the tan/brown header, brick-red buttons, and green
   accents are set as CSS variables at the top of `styles.css` (`:root`).
   Change the hex values there to match your site exactly once you send

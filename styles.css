@@ -65,24 +65,11 @@ button:focus-visible, a:focus-visible {
   flex-wrap: wrap;
 }
 
-.logo-badge {
+.logo-mark {
   flex: 0 0 auto;
-  width: 92px;
-  height: 92px;
-  border-radius: 50%;
-  border: 4px solid var(--white);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  line-height: 1.05;
-  font-family: var(--font-head);
+  width: 150px;
+  height: auto;
 }
-
-.logo-badge__rafter { font-size: 12px; letter-spacing: 0.08em; }
-.logo-badge__j { font-size: 30px; font-weight: 700; }
-.logo-badge__construction { font-size: 7px; letter-spacing: 0.06em; }
 
 .site-header__title { flex: 1 1 260px; }
 
@@ -494,8 +481,7 @@ button:focus-visible, a:focus-visible {
 @media (max-width: 560px) {
   body { font-size: 18px; }
   .step__title { font-size: 25px; }
-  .logo-badge { width: 74px; height: 74px; }
-  .logo-badge__j { font-size: 24px; }
+  .logo-mark { width: 110px; }
   .site-header__title h1 { font-size: 21px; }
   .swatch-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
   .review-row { flex-wrap: wrap; }
