@@ -170,6 +170,22 @@ button:focus-visible, a:focus-visible {
   vertical-align: middle;
 }
 
+.disclaimer {
+  background: #f1ebdf;
+  border-left: 4px solid var(--brown);
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.5;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin: 0 0 22px;
+  max-width: 62ch;
+}
+
+.disclaimer strong {
+  color: var(--ink);
+}
+
 /* ---------- Info form ---------- */
 .field {
   margin-bottom: 22px;

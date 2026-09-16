@@ -81,9 +81,22 @@ const COLOR_STEPS = [
   {
     key: "soffit",
     title: "Soffit Color",
-    intro: "Soffit is the underside of the roof overhang. Many customers match this to the trim or walls.",
+    intro: "Soffit is the underside of the roof overhang. Many customers match this to the trim or walls. This one is optional — skip it if you're not sure.",
+    optional: true,
   },
 ];
+
+const MUELLER_DISCLAIMER_LEAD = "These colors are from Mueller's official Signature 200 / Signature 300 panel color chart.";
+const MUELLER_DISCLAIMER_NOTE =
+  "Colors shown here are a digital representation only. Screen displays and lighting conditions can render colors differently than the actual painted metal panel. Final color selections should be verified against a physical Mueller color chip prior to placing your order.";
+
+function buildDisclaimer() {
+  return el("p", { class: "disclaimer" }, [
+    MUELLER_DISCLAIMER_LEAD + " ",
+    el("strong", {}, "Please note: "),
+    MUELLER_DISCLAIMER_NOTE,
+  ]);
+}
 
 const TOTAL_STEPS = 3 + COLOR_STEPS.length; // info + color steps + review + success
 
@@ -180,9 +193,12 @@ function clearError(fieldId) {
 /* ---------------- Color steps ---------------- */
 function buildColorStep(config, stepNumber) {
   const section = el("section", { class: "step", "data-step": String(stepNumber) });
+  const titleChildren = [config.title];
+  if (config.optional) titleChildren.push(el("span", { class: "step__optional" }, "Optional"));
   section.append(
-    el("h2", { class: "step__title" }, config.title),
-    el("p", { class: "step__intro" }, config.intro)
+    el("h2", { class: "step__title" }, titleChildren),
+    el("p", { class: "step__intro" }, config.intro),
+    buildDisclaimer()
   );
 
   const tabs = el("div", { class: "line-tabs" });
@@ -420,7 +436,9 @@ function isStepValid(stepNumber) {
   }
   const colorIdx = stepNumber - 2;
   if (colorIdx >= 0 && colorIdx < COLOR_STEPS.length) {
-    return !!state.selections[COLOR_STEPS[colorIdx].key];
+    const config = COLOR_STEPS[colorIdx];
+    if (config.optional) return true;
+    return !!state.selections[config.key];
   }
   return true;
 }
