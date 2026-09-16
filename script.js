@@ -106,6 +106,8 @@ const state = {
   email: "",
   selections: { roof: null, walls: null, trim: null, soffit: null },
   filters: { roof: "Signature 200", walls: "Signature 200", trim: "Signature 200", soffit: "Signature 200" },
+  signature: "",
+  signatureAgreed: false,
   submitting: false,
 };
 
@@ -299,14 +301,54 @@ function renderReview() {
     );
   });
 
-  content.append(infoCard, colorCard);
+  const signatureCard = el("div", { class: "review-card" }, [
+    el("h3", {}, "Confirm & Sign"),
+    buildDisclaimer(),
+    el("div", { class: "field", id: "field-signature" }, [
+      el("label", { for: "input-signature" }, "Type Your Full Name to Sign"),
+      el("input", {
+        type: "text",
+        id: "input-signature",
+        class: "signature-input",
+        autocomplete: "name",
+        placeholder: "Your Name",
+        value: state.signature,
+        oninput: (e) => { state.signature = e.target.value; clearError("field-signature"); updateSendState(); },
+      }),
+      el("p", { class: "field-error" }, "Please type your name to sign."),
+    ]),
+    el("div", { class: "field", id: "field-agree" }, [
+      el("label", { class: "agree-row" }, [
+        el("input", {
+          type: "checkbox",
+          id: "input-agree",
+          ...(state.signatureAgreed ? { checked: "checked" } : {}),
+          onchange: (e) => { state.signatureAgreed = e.target.checked; clearError("field-agree"); updateSendState(); },
+        }),
+        el("span", {}, "I confirm the colors above are my final selections and I understand the note about digital color representation."),
+      ]),
+      el("p", { class: "field-error" }, "Please check the box to confirm before sending."),
+    ]),
+  ]);
+
+  content.append(infoCard, colorCard, signatureCard);
   content.appendChild(
     el(
       "button",
-      { type: "button", class: "btn btn--green btn--big", id: "sendBtn", onclick: handleSubmit },
+      { type: "button", class: "btn btn--green btn--big", id: "sendBtn", disabled: "disabled", onclick: handleSubmit },
       state.submitting ? "Sending…" : "Send My Selections"
     )
   );
+  updateSendState();
+}
+
+function isSignatureValid() {
+  return state.signature.trim().length > 0 && state.signatureAgreed;
+}
+
+function updateSendState() {
+  const sendBtn = document.getElementById("sendBtn");
+  if (sendBtn) sendBtn.disabled = !isSignatureValid();
 }
 
 async function handleSubmit() {
@@ -314,6 +356,12 @@ async function handleSubmit() {
   const status = document.getElementById("submit-status");
   status.className = "submit-status";
   status.textContent = "";
+
+  if (!isSignatureValid()) {
+    if (state.signature.trim().length === 0) document.getElementById("field-signature").classList.add("has-error");
+    if (!state.signatureAgreed) document.getElementById("field-agree").classList.add("has-error");
+    return;
+  }
 
   if (WEB3FORMS_ACCESS_KEY === "REPLACE_WITH_YOUR_WEB3FORMS_KEY") {
     status.className = "submit-status submit-status--error is-visible";
@@ -331,6 +379,8 @@ async function handleSubmit() {
     return `${c.title.replace(" Color", "")}: ${sel ? `${sel.name} (${sel.hex}, ${sel.line})` : "Not selected"}`;
   }).join("\n");
 
+  const signedAt = new Date().toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" });
+
   const payload = {
     access_key: WEB3FORMS_ACCESS_KEY,
     subject: `New Color Selection — ${state.name || "Unnamed Customer"}`,
@@ -338,7 +388,7 @@ async function handleSubmit() {
     name: state.name,
     phone: state.phone,
     email: state.email || undefined,
-    message: `Customer: ${state.name}\nPhone: ${state.phone || "—"}\nEmail: ${state.email || "—"}\n\n${summaryLines}`,
+    message: `Customer: ${state.name}\nPhone: ${state.phone || "—"}\nEmail: ${state.email || "—"}\n\n${summaryLines}\n\nSigned: ${state.signature} (confirmed ${signedAt})`,
   };
 
   try {
@@ -349,6 +399,7 @@ async function handleSubmit() {
     });
     const result = await response.json();
     if (result.success) {
+      state.signedAt = signedAt;
       goToStep(TOTAL_STEPS);
     } else {
       throw new Error(result.message || "Unknown error");
@@ -400,13 +451,20 @@ function renderSuccessSummary() {
     row.querySelector(".review-edit").remove();
     card.appendChild(row);
   });
+  const signedRow = reviewRow("Signed", state.signature || "—", () => {});
+  signedRow.querySelector(".review-edit").remove();
+  card.appendChild(signedRow);
   content.appendChild(card);
+  if (state.signedAt) content.appendChild(el("p", { class: "review-note" }, `Confirmed ${state.signedAt}`));
 }
 
 function resetForm() {
   state.name = "";
   state.phone = "";
   state.email = "";
+  state.signature = "";
+  state.signatureAgreed = false;
+  state.signedAt = null;
   state.selections = { roof: null, walls: null, trim: null, soffit: null };
   buildWizard();
   goToStep(1);
