@@ -41,11 +41,15 @@ to call you instead — so nothing breaks if you forget this step.
 
 1. Push this project to a GitHub repository (already done if you're reading
    this from the repo).
-2. On GitHub, go to **Settings → Pages**.
+2. On GitHub, go to **Settings → Pages** (left sidebar, under "Code and
+   automation").
 3. Under "Build and deployment", set **Source** to `Deploy from a branch`,
-   pick the `main` branch and the `/ (root)` folder, then **Save**.
-4. After a minute or two, GitHub will give you a link like:
-   `https://yourusername.github.io/RafterJ/`
+   pick the branch this code is on (currently
+   `claude/metal-building-color-selector-kh44a3` — there's no `main` branch
+   yet) and the `/ (root)` folder, then **Save**.
+4. After a minute or two, refresh that same Settings → Pages screen — it
+   will show your live link near the top, something like:
+   `https://mkenziebrook-boop.github.io/RafterJ/`
 5. That's the link you text or email to customers.
 
 ## 3. Customize it
