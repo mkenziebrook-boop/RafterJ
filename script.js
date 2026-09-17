@@ -8,7 +8,7 @@
    2. Paste that key below in place of "REPLACE_WITH_YOUR_WEB3FORMS_KEY".
    See README.md for full step-by-step instructions.
    ======================================================================= */
-const WEB3FORMS_ACCESS_KEY = "b2f1a08d-f696-4107-9b8a-d80d8220be38";
+const WEB3FORMS_ACCESS_KEY = "b04a8faf-0c65-41f8-8bd7-c8f66238788c";
 
 /* Colors sampled directly from Mueller, Inc.'s official 2026 "Mueller
    Panel Color Chart" (Signature 200 and Signature 300 lines). Swap or
